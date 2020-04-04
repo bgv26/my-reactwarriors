@@ -1,5 +1,5 @@
 import React from "react";
-import "./styles.css";
+import "../css/styles.css";
 
 import Image from "./Image";
 
@@ -27,7 +27,7 @@ class MovieItem extends React.Component {
 
   render() {
     const {
-      data: { title, average_rate, src, overview }
+      data: { title, average_rate, backdrop_path: src, overview }
     } = this.props;
     return (
       <div className="MovieItem">
