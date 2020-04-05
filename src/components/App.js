@@ -12,14 +12,25 @@ class App extends React.Component {
     };
   }
 
+  removeMovie = movie => {
+    const updateMovies = this.state.movies.filter(item => item.id !== movie.id);
+    this.setState({ movies: updateMovies });
+  };
+
   render() {
-    return this.state.movies.map(function(movie) {
-      return (
-        <div className="App">
-          <MovieItem data={movie} />
-        </div>
-      );
-    });
+    return (
+      <div className="App">
+        {this.state.movies.map(movie => {
+          return (
+            <MovieItem
+              key={movie.id}
+              movie={movie}
+              removeMovie={this.removeMovie}
+            />
+          );
+        })}
+      </div>
+    );
   }
 }
 

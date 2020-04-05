@@ -26,14 +26,12 @@ class MovieItem extends React.Component {
   };
 
   render() {
-    const {
-      data: { title, average_rate, backdrop_path: src, overview }
-    } = this.props;
+    const { movie, removeMovie } = this.props;
     return (
       <div className="MovieItem">
-        <Image src={src} alt={title} />
-        <h1>{title}</h1>
-        <h2>{average_rate}</h2>
+        <Image src={movie.backdrop_path} alt={movie.title} />
+        <h1>{movie.title}</h1>
+        <h2>{movie.average_rate}</h2>
         <div className="ButtonBlock">
           <button type="button" onClick={this.toggleOverview}>
             {this.state.show ? "hide" : "show"}
@@ -45,8 +43,11 @@ class MovieItem extends React.Component {
           >
             {this.state.like ? "Unlike" : "Like"}
           </button>
+          <button type="button" onClick={removeMovie.bind(this, movie)}>
+            Delete
+          </button>
         </div>
-        {this.state.show ? <p>{overview}</p> : null}
+        {this.state.show ? <p>{movie.overview}</p> : null}
       </div>
     );
   }
