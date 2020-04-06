@@ -26,28 +26,29 @@ class MovieItem extends React.Component {
   };
 
   render() {
-    const { movie, removeMovie } = this.props;
+    const { movie, removeMovie, addMovieToWatch } = this.props;
     return (
-      <div className="MovieItem">
-        <Image src={movie.backdrop_path} alt={movie.title} />
-        <h1>{movie.title}</h1>
-        <h2>{movie.average_rate}</h2>
-        <div className="ButtonBlock">
-          <button type="button" onClick={this.toggleOverview}>
-            {this.state.show ? "hide" : "show"}
-          </button>
-          <button
-            type="button"
-            onClick={this.toggleLike}
-            className={this.state.like ? "btn--like--checked" : ""}
-          >
-            {this.state.like ? "Unlike" : "Like"}
-          </button>
-          <button type="button" onClick={removeMovie.bind(this, movie)}>
+      <div className="card">
+        <Image
+          src={movie.backdrop_path || movie.poster_path}
+          alt={movie.title}
+        />
+        <div className="card-body">
+          <h6 className="card-title">{movie.title}</h6>
+          <div className="d-flex justify-content-between align-items-center">
+            <p className="mb-0">Rating: {movie.average_rate}</p>
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={addMovieToWatch.bind(null, movie)}
+            >
+              Will watch
+            </button>
+          </div>
+          <button type="button" onClick={removeMovie.bind(null, movie)}>
             Delete
           </button>
         </div>
-        {this.state.show ? <p>{movie.overview}</p> : null}
       </div>
     );
   }

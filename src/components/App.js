@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: moviesData
+      movies: moviesData,
+      moviesToWatch: []
     };
   }
 
@@ -17,18 +18,34 @@ class App extends React.Component {
     this.setState({ movies: updateMovies });
   };
 
+  addMovieToWatch = movie => {
+    const updateMovies = [...this.state.moviesToWatch, movie];
+    this.setState({ moviesToWatch: updateMovies });
+  };
+
   render() {
     return (
-      <div className="App">
-        {this.state.movies.map(movie => {
-          return (
-            <MovieItem
-              key={movie.id}
-              movie={movie}
-              removeMovie={this.removeMovie}
-            />
-          );
-        })}
+      <div className="container">
+        <div className="row">
+          <div className="col-9">
+            <div className="row">
+              {this.state.movies.map(movie => {
+                return (
+                  <div className="col-6 mb-4" key={movie.id}>
+                    <MovieItem
+                      movie={movie}
+                      removeMovie={this.removeMovie}
+                      addMovieToWatch={this.addMovieToWatch}
+                    />
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+          <div className="col-3">
+            <p>Will watch: {this.state.moviesToWatch.length}</p>
+          </div>
+        </div>
       </div>
     );
   }
