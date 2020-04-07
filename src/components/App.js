@@ -18,8 +18,15 @@ class App extends React.Component {
     this.setState({ movies: updateMovies });
   };
 
-  addMovieToWatch = movie => {
+  addMovieToWatchList = movie => {
     const updateMovies = [...this.state.moviesToWatch, movie];
+    this.setState({ moviesToWatch: updateMovies });
+  };
+
+  removeMovieFromWatchList = movie => {
+    const updateMovies = this.state.moviesToWatch.filter(
+      item => item.id !== movie.id
+    );
     this.setState({ moviesToWatch: updateMovies });
   };
 
@@ -35,7 +42,8 @@ class App extends React.Component {
                     <MovieItem
                       movie={movie}
                       removeMovie={this.removeMovie}
-                      addMovieToWatch={this.addMovieToWatch}
+                      addMovieToWatchList={this.addMovieToWatchList}
+                      removeMovieFromWatchList={this.removeMovieFromWatchList}
                     />
                   </div>
                 );

@@ -9,7 +9,8 @@ class MovieItem extends React.Component {
 
     this.state = {
       show: false,
-      like: false
+      like: false,
+      willWatch: false
     };
   }
 
@@ -25,8 +26,19 @@ class MovieItem extends React.Component {
     });
   };
 
+  toggleWillWatch = () => {
+    this.setState({
+      willWatch: !this.state.willWatch
+    });
+  };
+
   render() {
-    const { movie, removeMovie, addMovieToWatch } = this.props;
+    const {
+      movie,
+      removeMovie,
+      addMovieToWatchList,
+      removeMovieFromWatchList
+    } = this.props;
     return (
       <div className="card">
         <Image
@@ -39,10 +51,19 @@ class MovieItem extends React.Component {
             <p className="mb-0">Rating: {movie.average_rate}</p>
             <button
               type="button"
-              className="btn btn-secondary"
-              onClick={addMovieToWatch.bind(null, movie)}
+              className={
+                this.state.willWatch ? "btn btn-success" : "btn btn-secondary"
+              }
+              onClick={() => {
+                this.toggleWillWatch();
+                this.state.willWatch
+                  ? removeMovieFromWatchList(movie)
+                  : addMovieToWatchList(movie);
+              }}
             >
-              Will watch
+              {this.state.willWatch
+                ? "Remove from Watch List"
+                : "Add to Watch List"}
             </button>
           </div>
           <button type="button" onClick={removeMovie.bind(null, movie)}>
