@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/styles.css";
+import "../stylesheets/index.scss";
 
 const URL = "https://image.tmdb.org/t/p/w500";
 

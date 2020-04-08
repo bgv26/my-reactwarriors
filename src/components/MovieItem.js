@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/styles.css";
+import "../stylesheets/index.scss";
 
 import Image from "./Image";
 
@@ -48,7 +48,7 @@ class MovieItem extends React.Component {
         <div className="card-body">
           <h6 className="card-title">{movie.title}</h6>
           <div className="d-flex justify-content-between align-items-center">
-            <p className="mb-0">Rating: {movie.average_rate}</p>
+            <p className="mb-0">Rating: {movie.vote_average}</p>
             <button
               type="button"
               className={

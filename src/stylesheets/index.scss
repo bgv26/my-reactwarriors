@@ -1,0 +1,16 @@
+body {
+  background: #f9f9f9;
+}
+
+.btn--like--checked {
+  color: white;
+  background: blue;
+}
+
+.nav-link {
+  cursor: pointer;
+
+  &:hover {
+    color: #007bff;
+  }
+}

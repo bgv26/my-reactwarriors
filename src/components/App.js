@@ -1,6 +1,7 @@
 import React from "react";
-import { moviesData } from "../moviesData";
-import "../css/styles.css";
+// import { moviesData } from "../moviesData";
+import { API_URL, API_KEY_3 } from "../utils/api";
+import "../stylesheets/index.scss";
 
 import MovieItem from "./MovieItem";
 
@@ -8,9 +9,17 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      movies: moviesData,
+      movies: [],
       moviesToWatch: []
     };
+  }
+
+  componentDidMount() {
+    fetch(
+      `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=popularity.desc`
+    )
+      .then(response => response.json())
+      .then(data => this.setState({ movies: data.results }));
   }
 
   removeMovie = movie => {
