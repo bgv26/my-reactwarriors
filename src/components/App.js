@@ -22,7 +22,7 @@ class App extends React.Component {
   getMovies = () => {
     fetch(
       `${API_URL}/discover/movie?api_key=${API_KEY_3}&sort_by=${
-        this.state.sort_by
+      this.state.sort_by
       }&page=${this.state.page}`
     )
       .then(response => response.json())
@@ -36,10 +36,11 @@ class App extends React.Component {
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (
-      prevState.sort_by !== this.state.sort_by ||
-      prevState.page !== this.state.page
-    ) {
+    if (prevState.sort_by !== this.state.sort_by) {
+      this.setState({ page: 1 });
+      this.getMovies();
+    }
+    else if (prevState.page !== this.state.page) {
       this.getMovies();
     }
   }
@@ -75,6 +76,15 @@ class App extends React.Component {
                 <MovieTabs
                   sort_by={this.state.sort_by}
                   updateSortBy={this.updateSortBy}
+                />
+              </div>
+            </div>
+            <div className="row mt-4">
+              <div className="col-12">
+                <Pages
+                  page={this.state.page}
+                  total_pages={this.state.total_pages}
+                  updatePage={this.updatePage}
                 />
               </div>
             </div>
