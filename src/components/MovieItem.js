@@ -1,7 +1,7 @@
 import React from "react";
 import "../stylesheets/index.scss";
 
-import Image from "./Image";
+const IMAGE_URL = "https://image.tmdb.org/t/p/w500";
 
 class MovieItem extends React.Component {
   constructor() {
@@ -41,8 +41,9 @@ class MovieItem extends React.Component {
     } = this.props;
     return (
       <div className="card">
-        <Image
-          src={movie.backdrop_path || movie.poster_path}
+        <img
+          className="card-img-top"
+          src={`${IMAGE_URL}${movie.backdrop_path || movie.poster_path}`}
           alt={movie.title}
         />
         <div className="card-body">
